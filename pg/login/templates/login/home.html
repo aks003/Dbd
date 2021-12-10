@@ -1,0 +1,7 @@
+{% extends "login/base.html" %}
+
+{% block body %}
+    <h1>Home page of Admin</h1>
+    <h2>Email : {{ mail }}</h2>
+    <a href="{% url 'logout' %}">Logout</a>
+{% endblock %}
