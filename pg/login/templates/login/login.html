@@ -13,9 +13,13 @@ justify-content: space-around;
 			<h1>Create Account</h1>
 			<div class="form-signup">
 			<p>Username {{ form.username }}</p>
+			<p>{{ form.username.errors }}</p>
 			<p>Email {{ form.email }}</p>
+			<p>{{ form.email.errors }}</p>
 			<p>Password{{ form.password1 }}</p>
+			<p>{{ form.password1.errors }}</p>
 			<p>Confirm Password{{ form.password2 }}</p>
+			<p>{{ form.password2.errors }}</p>
 			</div>	
 			<button>Sign Up</button>
 		</form>

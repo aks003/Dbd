@@ -28,8 +28,9 @@ def signup(request):
         str=request.POST['email']
         x = re.search('@rvce.edu.in$', str)
         y=False
-        if len(str)<17:
+        if len(str)<17 or x is False :
             print("invalid mail")
+            messages.success(request, f'Wrong Mail')
         else:
             str1=str[-17:-12]
             y = bool(re.search("\.[a-z][a-z][0-2][0-9]", str1))
