@@ -34,17 +34,21 @@ def signup(request):
             str1=str[-17:-12]
             y = bool(re.search("\.[a-z][a-z][0-2][0-9]", str1))
         if form.is_valid() and x  :
+            print("REACHED INSIDE FORM IS VALID")
+            user = form.save(commit=False)
+            
             if y:
                 user.is_student=True
+                
             else:
                 user.is_teacher=True
-            print("REACHED INSIDE FORM IS VALID")
-            form.save()
+
+            user.save()    
             messages.success(request, f'Your account has been created ! You are now able to log in')
             return HttpResponseRedirect(reverse("home"))
     else:
         form = UserRegisterForm()
-    return render(request,'login/signup.html',{'form': form})
+    return render(request,'login/login.html',{'form': form , 'rd':True})
 
 def login_view(request):
     if request.method == 'POST':
@@ -61,7 +65,7 @@ def login_view(request):
         else:
             return render(request,'login/login.html')
     form = UserRegisterForm()
-    return render(request,'login/login.html',{'form':form})
+    return render(request,'login/login.html',{'form':form,'rd':False})
 
 def logout_view(request):
     logout(request)
