@@ -30,7 +30,7 @@ def signup(request):
         y=False
         if len(str)<17 or x is False :
             print("invalid mail")
-            messages.success(request, f'Wrong Mail')
+            messages.error(request, f'Wrong Mail')
         else:
             str1=str[-17:-12]
             y = bool(re.search("\.[a-z][a-z][0-2][0-9]", str1))
@@ -43,10 +43,18 @@ def signup(request):
                 
             else:
                 user.is_teacher=True
+            # user1=authenticate(request,username=user.username,password=user)
+            user.save()
 
-            user.save()    
-            messages.success(request, f'Your account has been created ! You are now able to log in')
-            return HttpResponseRedirect(reverse("home"))
+            login(request, user)
+            mail=user.email
+            if user.is_student:
+                return redirect('/student')
+            else:
+                return render(request,'login/home.html',{'mail':mail})   
+            
+        else :
+            messages.error(request, f'Your account has not been created')
     else:
         form = UserRegisterForm()
     return render(request,'login/login.html',{'form': form , 'rd':True})

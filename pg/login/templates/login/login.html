@@ -7,7 +7,7 @@ display: flex;
 justify-content: space-around;
 ">
 <div class="container" id="container">
-	<div class="form-container sign-up-container">
+	<div class="form-container sign-up-container ">
 		<form action="{% url 'signup' %}" method="POST">
 			{% csrf_token %}
 			<h1>Create Account</h1>
@@ -56,8 +56,12 @@ justify-content: space-around;
 	</div>
 </div>
 </div>
+
 <script>
-    const signUpButton = document.getElementById('signUp');
+
+
+
+const signUpButton = document.getElementById('signUp');
 const signInButton = document.getElementById('signIn');
 const container = document.getElementById('container');
 
@@ -67,6 +71,9 @@ signUpButton.addEventListener('click', () => {
 
 signInButton.addEventListener('click', () => {
 	container.classList.remove("right-panel-active");
+
+
+
 });
 </script>
 
