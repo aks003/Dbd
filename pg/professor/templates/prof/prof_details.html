@@ -1,0 +1,30 @@
+<h1>This is professor details</h1>
+<p>{{prof.name}}</p>
+<p>{{prof.email}}</p>
+<p>{{prof.prof_id}}</p>
+<p>{{prof.phone_no}}</p>
+<a href="#" onclick="show()"> STUDENTS</a>
+<div id="myDIV" style="display: none;">
+    {% for a in stu %}
+    <p>
+        {{a.name}}
+        {{a.phone_no}}
+        {{a.email}}
+    </p>
+    {%endfor%}
+</div>
+
+<a href="/professor/details">Details</a>
+<a href="/professor/marks">Marks</a>
+<script>
+    function show()
+    {
+        var x = document.getElementById("myDIV");
+        if (x.style.display === "block") {
+        x.style.display = "none";
+        }
+        else {
+        x.style.display = "block";
+        }
+    }
+</script>

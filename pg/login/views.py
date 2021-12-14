@@ -70,7 +70,7 @@ def login_view(request):
             if user.is_student:
                 return redirect('/student')
             else:
-                return render(request,'login/home.html',{'mail':mail})
+                return redirect('/professor/details')
         else:
             return render(request,'login/login.html')
     form = UserRegisterForm()
