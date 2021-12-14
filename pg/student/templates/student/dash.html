@@ -1,3 +1,10 @@
 <h1>This is student Dash Board</h1>
+{% for message in messages %}
+        <li{% if message.tags %} class="{{ message.tags }}"{% endif %} style="
+        color: black;
+        text-align: center;
+        list-style-type: none;
+    ">{{ message }}</li>
+    {% endfor %}
 <a href="/student/deliverables">deliverables</a>
 <a href="/student/details">Details</a>

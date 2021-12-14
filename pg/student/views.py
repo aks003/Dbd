@@ -1,10 +1,12 @@
 from django.http.response import HttpResponse, HttpResponseRedirect
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 from django.urls.base import reverse
 from django import forms
+from schema.models import deliverables_db
 from schema.models import professor_db
 from schema.models import student_db
 from .forms import DeliverablesForm
+from django.contrib import messages
 
 # Create your views here.
 def homepage(request):
@@ -16,7 +18,7 @@ def homepage(request):
 def details(request):
     if request.user.is_student:
         student1=student_db.objects.get(email=request.user.email)
-        prof=professor_db.objects.filter(prof_id=student1.prof_id).values('name')[0]
+        prof=professor_db.objects.get(prof_id=student1.prof_id)
         print(prof)
         print(student1.prof_id)
         return render(request,'student/details.html',{'student':student1,'prof':prof})
@@ -25,8 +27,11 @@ def details(request):
 
 def deliverables(request):
     if request.user.is_student:
+        mail1=request.user.email
+        student1=student_db.objects.get(email=mail1).usn
         if request.method == 'GET':
-            mail1=request.user.email
+            
+            
             try:
                 student1=student_db.objects.get(email=mail1).usn
                 
@@ -38,14 +43,39 @@ def deliverables(request):
             form.fields['usn'].widget=forms.HiddenInput()
             return render(request,'student/deliverables.html', {'form': form , 'usn':student1 })
         else:
+            print('hi')
+            print(request.POST['phase_id'])
             form = DeliverablesForm(request.POST)
-            if form.is_valid():
-                form.save()
-                return HttpResponseRedirect(reverse("home"))
-                
+            
+            obj = deliverables_db.objects.filter(usn=student1,phase_id=request.POST['phase_id']).first()
+            if obj: 
+                obj.gdrive_link=request.POST['gdrive_link']
+                obj.ppt=request.POST['ppt']
+                obj.report=request.POST['report']
+                obj.save()
+                messages.success(request, f'Your have submitted the deliverables')
+                return redirect('stu-home')
             else:
-                return render(request,'student/deliverables.html', {'form': form})
+                # received_usn = student1
+                # received_phase_id= request.POST.get('phase_id')
+                # received_gdrive_link = request.POST.get('gdrive_link')
+                # received_ppt = request.POST.get('ppt')
+                # received_report = request.POST.get('report')
+                # obj=deliverables_db()
+                # obj.gdrive_link=request.POST['gdrive_link']
+                # obj.ppt=request.POST['ppt']
+                # obj.report=request.POST['report']
+                # obj.usn=student1
+                # obj.phase_id= request.POST.get('phase_id')
+                # obj.save()
+
+                if form.is_valid():
+                    form.save()
+                    return redirect('home')
+
+                else:
+                    return render(request,'student/deliverables.html',{'form':form})
     else:
-        return HttpResponseRedirect(reverse("home"))
+        return redirect("home")
     
     
