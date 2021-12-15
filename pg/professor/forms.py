@@ -17,8 +17,5 @@ class rubricsform(ModelForm):
         if commit:
             deliverable.save()
         return deliverable
-<<<<<<< HEAD
 
 # class details(ModelForm):
-=======
->>>>>>> 5cebe7579aa41478d383665bffe1511196d62e65
