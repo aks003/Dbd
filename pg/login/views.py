@@ -51,7 +51,7 @@ def signup(request):
             if user.is_student:
                 return redirect('/student')
             else:
-                return render(request,'login/home.html',{'mail':mail})   
+               return redirect('/professor/details')   
             
         else :
             messages.error(request, f'Your account has not been created')
