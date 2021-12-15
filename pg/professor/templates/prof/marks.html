@@ -1,3 +1,10 @@
 <h1>This is marks page</h1>
+
+<form method="POST">
+    {% csrf_token %}
+    {{form}}
+    <button>Save</button>
+</form>
+
 <a href="//localhost:8000/professor/details/student">Details</a>
 <a href="//localhost:8000/professor/details">Prof Details</a>
