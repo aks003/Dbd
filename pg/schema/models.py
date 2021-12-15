@@ -67,9 +67,11 @@ class deliverables_db(models.Model):
     
 
 class rubrics_db(models.Model):
+    # usn=models.ForeignKey(student_db,on_delete=models.CASCADE)
     phase_id=models.ForeignKey(phase_db,on_delete=models.CASCADE)
     rname=models.CharField(max_length=256)
-    rmarks=models.DecimalField(max_digits=4,decimal_places=2)
+    r_max_marks=models.DecimalField(max_digits=4,decimal_places=2)
+    # r_marks_obtained=models.DecimalField(max_digits=4,decimal_places=2)
     rnumber=models.IntegerField()
     class Meta:
         constraints = [
@@ -77,7 +79,18 @@ class rubrics_db(models.Model):
         ]
     
     def __str__(self):
-        return f"%s-%s" % (self.phase_id, self.rname)
+        return f"%s-%s-%s" % (self.phase_id, self.rname,self.r_max_marks)
+
+class rubrics_evaluation_db(models.Model):
+    usn=models.ForeignKey(student_db,on_delete=models.CASCADE)
+    prof=models.ForeignKey(professor_db,on_delete=models.DO_NOTHING)
+    rubrics=models.ForeignKey(rubrics_db,on_delete=models.DO_NOTHING)
+    r_marks_obtained=models.DecimalField(max_digits=4,decimal_places=2)
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(fields=['usn', 'prof','rubrics'], name='r_eval')
+        ]
+    
 
 class evaluation_db(models.Model):
     usn=models.ForeignKey(student_db,on_delete=models.CASCADE)
