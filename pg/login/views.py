@@ -72,6 +72,7 @@ def login_view(request):
             else:
                 return redirect('/professor/details')
         else:
+            messages.error(request, f'Invalid username or passwprd')
             return render(request,'login/login.html')
     form = UserRegisterForm()
     return render(request,'login/login.html',{'form':form,'rd':False})
