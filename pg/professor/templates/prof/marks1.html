@@ -1,0 +1,27 @@
+{% extends "prof/base.html" %}
+
+{% block body %}
+<h1>This is marks page</h1>
+
+<form method="POST">
+
+    {% csrf_token %}
+    {%for a in obj2 %}
+    <input type="hidden" id="custId" name="usn" value="{{usn}}">
+    <p>{{a.phase_id}}</p>
+    <p>{{a.rname}}</p>
+    <p>{{a.r_max_marks}}</p>
+    <p>{{c}}</p>
+    <p>{{prof}}</p>
+    {{b.as_p}}
+    <input type="number" id="quantity" name="{{a.rname}}" max="{{a.r_max_marks}}">
+    {%endfor%}
+    <button>Save</button>
+</form>
+<p>
+    
+</p>
+
+<a href="//localhost:8000/professor/details/student">Details</a>
+<a href="//localhost:8000/professor/details">Prof Details</a>
+{%endblock%}

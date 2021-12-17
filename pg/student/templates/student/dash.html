@@ -1,4 +1,5 @@
-<h1>This is student Dash Board</h1>
+{%extends "student/base.html"%}
+{%block body%}
 {% for message in messages %}
         <li{% if message.tags %} class="{{ message.tags }}"{% endif %} style="
         color: black;
@@ -9,3 +10,4 @@
 <a href="/student/deliverables">deliverables</a>
 <a href="/student/details">Details</a>
 <a href="#" > Final Marks</a>
+{%endblock%}

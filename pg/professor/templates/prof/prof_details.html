@@ -1,4 +1,5 @@
-<h1>This is professor details</h1>
+{% extends "prof/base.html" %}
+{%block body%}
 <p>{{prof.name}}</p>
 <p>{{prof.email}}</p>
 <p>{{prof.prof_id}}</p>
@@ -7,7 +8,7 @@
 <div id="myDIV" style="display: none;">
     {% for a in stu %}
     <p>
-        {{a.name}}
+        <a href="/professor/marks?mark={{a.usn}}">{{a.name}}</a>
         {{a.phone_no}}
         {{a.email}}
     </p>
@@ -28,3 +29,4 @@
         }
     }
 </script>
+{%endblock%}
