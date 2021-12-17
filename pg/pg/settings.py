@@ -42,7 +42,8 @@ INSTALLED_APPS = [
     'login.apps.LoginConfig',
     'student',
     'schema',
-    'professor'
+    'professor',
+    'admins',
     
 ]
 

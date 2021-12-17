@@ -1,4 +1,5 @@
 from typing import Pattern
+from django import urls
 from django.urls import path
 from django.urls.conf import include
 from . import views
@@ -9,6 +10,7 @@ urlpatterns=[
     path('logout/',views.logout_view,name="logout"),
     path('signup/',views.signup,name="signup"),
     path('student/',include('student.urls')),
-    path('professor/',include('professor.urls'))
+    path('professor/',include('professor.urls')),
+    path('admin/',include('admins.urls'))
 ]
 
