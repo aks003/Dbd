@@ -41,8 +41,8 @@ def marks(request):
             #     usn1.append(a.usn)
             #     form1.append(fm)
             # list1=zip(form1,usn1)
-        
-            return render(request,'prof/marks1.html',{'prof':prof,'usn':usn,'obj2':obj2})
+            obj4=rubrics_evaluation_db.objects.filter(usn=usn,prof=prof,rubrics=obj2.first()).first()
+            return render(request,'prof/marks1.html',{'prof':prof,'usn':usn,'obj2':obj2,'obj3':obj4})
             print(usn)
         else:
             for a in obj2:

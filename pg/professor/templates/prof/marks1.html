@@ -2,7 +2,7 @@
 
 {% block body %}
 <h1>This is marks page</h1>
-
+{%if obj3 is none%}
 <form method="POST">
 
     {% csrf_token %}
@@ -18,10 +18,11 @@
     {%endfor%}
     <button>Save</button>
 </form>
+{%else%}
 <p>
-    
+{{obj3.usn}}   
 </p>
-
+{%endif%}
 <a href="//localhost:8000/professor/details/student">Details</a>
 <a href="//localhost:8000/professor/details">Prof Details</a>
 {%endblock%}
