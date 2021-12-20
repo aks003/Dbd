@@ -1,26 +1,110 @@
 {% extends "prof/base.html" %}
 
 {% block body %}
-<h1>This is marks page</h1>
-{%if obj3 is none%}
-<form method="POST">
+<style>
+    .styled-table {
+    border-collapse: collapse;
+    margin: 25px 0;
+    font-size: 0.9em;
+    font-family: sans-serif;
+    min-width: 400px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+}
+.styled-table thead tr {
+    background-color: #27447e;
+    color: #ffffff;
+    text-align: left;
+}
+.styled-table th,
+.styled-table td {
+    padding: 12px 15px;
+}
+.styled-table tbody tr {
+    border-bottom: 1px solid #dddddd;
+}
+
+.styled-table tbody tr:nth-of-type(even) {
+    background-color: #f3f3f3;
+}
+
+.styled-table tbody tr:last-of-type {
+    border-bottom: 2px solid #27447e;
+}
+</style>
+{%if len == 0%}
+<form method="POST" style="
+text-align: center;
+">
 
     {% csrf_token %}
-    {%for a in obj2 %}
-    <input type="hidden" id="custId" name="usn" value="{{usn}}">
-    <p>{{a.phase_id}}</p>
-    <p>{{a.rname}}</p>
-    <p>{{a.r_max_marks}}</p>
-    <p>{{prof}}</p>
-    <input type="number" id="quantity" name="{{a.rname}}" max="{{a.r_max_marks}}">
-    {%endfor%}
-    <button>Save</button>
+    <p>Phase - {{phase}}</p>
+    <p>Professor id- {{prof}}</p>
+    <div style="
+    text-align: center;
+">
+        <div style="
+        display: flex;
+        justify-content: center;
+    ">
+    <table class="styled-table">
+        <thead>
+            <tr>
+                <th>Rubrics name</th>
+                <th>Ruberics max marks</th>
+                <th>Marks assigned</th>
+            </tr>
+        </thead>
+        <tbody>
+            {%for a in rubrics %}
+            <input type="hidden" id="custId" name="usn" value="{{usn}}">
+            <tr>
+                <td><p>{{a.rname}}</p></td>
+                <td><p>{{a.r_max_marks}}</p></td>
+                <td><input type="number" id="quantity" name="{{a.rname}}" max="{{a.r_max_marks}}"></td>
+            </tr>
+            {%endfor%}
+        </tbody>
+    </table>
+</div>
+    <button
+    style="
+    border-radius: 8px;
+    font-size: 20px;
+    background-color: #27447e;
+    color: white;
+    padding: 8px 16px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+">Save</button>
+</div>
+    
 </form>
 {%else%}
 <p>
-{{obj3.usn}}   
+    {{rubrics_eval.usn}} 
+    <h2 style="text-align: center;">Marks of students under your guidance</h2>
+    <table class="styled-table">
+        <thead>
+            <tr>
+                <th>USN</th>
+                <th>Rubrics(Category-PhaseNumber-RubricsName-MaxMarks)</th>
+                <th>Marks obtained</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for i in rubrics_eval %}
+            <tr>
+                <td>{{ i.usn }}</td>
+                <td>{{ i.rubrics }}</td>
+                <td>{{ i.r_marks_obtained}}</td>
+            </tr>
+            {% endfor %} 
+        </tbody>
+    </table>
 </p>
 {%endif%}
 <a href="//localhost:8000/professor/details/student">Details</a>
 <a href="//localhost:8000/professor/details">Prof Details</a>
+
 {%endblock%}
