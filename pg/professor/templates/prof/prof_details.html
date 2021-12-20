@@ -1,41 +1,22 @@
 {% extends "prof/base.html" %}
 {%block body%}
-<style>
-        .styled-table {
-    border-collapse: collapse;
-    margin: 25px 0;
-    font-size: 0.9em;
-    font-family: sans-serif;
-    min-width: 400px;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
-}
-.styled-table thead tr {
-    background-color: #27447e;
-    color: #ffffff;
-    text-align: left;
-}
-.styled-table th,
-.styled-table td {
-    padding: 12px 15px;
-}
-.styled-table tbody tr {
-    border-bottom: 1px solid #dddddd;
-}
 
-.styled-table tbody tr:nth-of-type(even) {
-    background-color: #f3f3f3;
-}
+<div style="
+display: flex;
+flex-direction: column;
+text-align: center;
+">
 
-.styled-table tbody tr:last-of-type {
-    border-bottom: 2px solid #27447e;
-}
-</style>
-<p>{{prof.name}}</p>
-<p>{{prof.email}}</p>
-<p>{{prof.prof_id}}</p>
-<p>{{prof.phone_no}}</p>
-<a href="#" onclick="show()"> STUDENTS</a>
-<div id="myDIV" style="display: none;">
+<p>Professor Name   : {{prof.name}}</p>
+<p>Email            : {{prof.email}}</p>
+<p>Professor ID     : {{prof.prof_id}}</p>
+<p>Phone Number     : {{prof.phone_no}}</p>
+<!-- <a href="#" onclick="show()"> STUDENTS</a>
+
+<a href="/professor/details">Details</a>
+<a href="/professor/marks">Marks</a> -->
+<div id="myDIV" style="display: flex;
+justify-content: center;">
     <table class="styled-table">
         <thead>
             <tr>
@@ -48,26 +29,12 @@
             {% for a in stu %}
             <tr>
                 <td><a href="/professor/marks?mark={{a.usn}}">{{a.name}}</a></td>
-                <td><p>{{a.phone_no}}</p></td>
-                <td>{{a.email}}</td>
+                <td><p>{{a.email}}</p></td>
+                <td>{{a.phone_no}}</td>
             </tr>
             {%endfor%}
         </tbody>
     </table>
 </div>
-
-<a href="/professor/details">Details</a>
-<a href="/professor/marks">Marks</a>
-<script>
-    function show()
-    {
-        var x = document.getElementById("myDIV");
-        if (x.style.display === "block") {
-        x.style.display = "none";
-        }
-        else {
-        x.style.display = "block";
-        }
-    }
-</script>
+</div>
 {%endblock%}

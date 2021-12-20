@@ -2,31 +2,79 @@
 <html lang="en">
     <head>
         <title>Auth</title>
-        
+
     </head>
     <body style="
-    display : block;">
+    display : block;
+    font-family: sans-serif;
+"   >
+<style>
+    .styled-table {
+border-collapse: collapse;
+margin: 25px 0;
+font-size: 0.9em;
+font-family: sans-serif;
+min-width: 400px;
+box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+}
+.styled-table thead tr {
+background-color: #27447e;
+color: #ffffff;
+text-align: left;
+}
+.styled-table th,
+.styled-table td {
+padding: 12px 15px;
+text-align: center;
+}
+.styled-table tbody tr {
+border-bottom: 1px solid #dddddd;
+}
+
+.styled-table tbody tr:nth-of-type(even) {
+background-color: #f3f3f3;
+}
+
+.styled-table tbody tr:last-of-type {
+border-bottom: 2px solid #27447e;
+}
+</style>
+
         {% include "prof/base-view.html" %}
         <nav style="
-        height: 30px;
+       height: 30px;
         background-color: rgb(39,68,126);
         margin-block-end: 20px;
         display: flex;
         align-items: center;
-        justify-content: flex-end;
+        justify-content: space-between;
+        font-family: sans-serif;
     ">
-        <form action="">
+        <a href="//localhost:8000/professor/details/" style="
+        -webkit-appearance: button;
+        -moz-appearance: button;
+        appearance: button;
+        background-color: white;
+        text-decoration: none;
+        color: initial;
+        border-radius: 8px;
+        padding: 4px 8px;
+        margin-left: 2vw;
+        font-family: sans-serif;
 
-        </form>
+    ">Home</a>
         <a href="//localhost:8000/logout" style="
             -webkit-appearance: button;
             -moz-appearance: button;
             appearance: button;
-            background-color: aqua;
+            background-color: white;
             text-decoration: none;
             color: initial;
             border-radius: 8px;
             padding: 4px 8px;
+            margin-right: 2vw;
+            font-family: sans-serif;
+
         ">Logout</a>
         </nav>
         {% if messages %}

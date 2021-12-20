@@ -1,11 +1,88 @@
 {%extends 'student/base.html'%}
 {% block body %}
-<p>USN:{{usn}}</p>
-<form method="POST">
+<style>
+    .styled-table {
+border-collapse: collapse;
+margin: 25px 0;
+font-size: 0.9em;
+font-family: sans-serif;
+min-width: 400px;
+box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+}
+.styled-table thead tr {
+background-color: #27447e;
+color: #ffffff;
+text-align: left;
+}
+.styled-table th,
+.styled-table td {
+padding: 12px 15px;
+text-align: center;
+}
+.styled-table tbody tr {
+border-bottom: 1px solid #dddddd;
+}
+
+.styled-table tbody tr:nth-of-type(even) {
+background-color: #f3f3f3;
+}
+
+.styled-table tbody tr:last-of-type {
+border-bottom: 2px solid #27447e;
+}
+</style>
+
+<form method="POST" style="text-align: center;">
 
     {% csrf_token %}
-    {{form.as_p}}
-    <button>Save</button>
+    <div style="
+    display: flex;
+    justify-content: center;
+">
+    <table class="styled-table">
+        <thead>
+            <tr>
+                <th>Feild</th>
+                <th>Value</th>
+            </tr>
+        </thead>
+        <tr>
+            <td>USN</td>
+            <td>{{usn}}</td>
+        </tr>
+    
+    <tr>
+        <td>Report</td>
+        <td>{{form.report}}</td>
+    </tr>
+    <tr>
+        <td>PPT</td>
+        <td>{{form.ppt}}</td>
+    </tr>
+    <tr>
+        <td>G-Drive Link</td>
+        <td>{{form.gdrive_link}}</td>
+    </tr>
+    <tr>
+        <td>Phase ID</td>
+        <td>{{form.phase_id}}</td>
+    </tr>
+</table>    
+</div>
+    
+    
+
+    <button
+    style="
+    border-radius: 8px;
+    font-size: 20px;
+    background-color: #27447e;
+    color: white;
+    padding: 8px 16px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+">Save</button>
 </form>
 
 {% endblock %}

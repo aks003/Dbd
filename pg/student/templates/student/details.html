@@ -1,28 +1,85 @@
-<h1>This is details page</h1>
-<a href="/student">Home</a>
-<p>{{student.name}}</p>
-<p>{{student.email}}</p>
-<p>{{student.usn}}</p>
-<p>{{student.phone_no}}</p>
-<p>{{student.brach}}</p>
-<p>{{student.sem}}</p>
-<p>{{student.cgpa}}</p>
-<p><a href="#" style="display: none;"onclick="show()">{{ prof.name }}</a></p>
-<div id="myDIV">
-    <p>{{prof.email}}</p>
-    <p>{{prof.phone_no}}</p>
-    <p>{{prof.email}}</p>
-
+{%extends "student/base.html"%}
+{%block body%}
+<div style="
+display: flex;
+justify-items: start;
+justify-content: space-evenly;
+flex-direction: row;
+">
+<table class="styled-table">
+    <thead>
+        <tr>
+            <th colspan="2">Student Details</th>
+        </tr>
+    </thead>
+    <tr>
+        <td>Name</td>
+        <td>{{student.name}}</td>
+    </tr>
+    <tr>
+        <td>Email</td>
+        <td>{{student.email}}</td>
+    </tr>
+    <tr>
+        <td>USN</td>
+        <td>{{student.usn}}</td>
+    </tr>
+    <tr>
+        <td>Phone Number</td>
+        <td>{{student.phone_no}}</td>
+    </tr>
+    <tr>
+        <td>Stream</td>
+        <td>{{student.branch}}</td>
+    </tr>
+    <tr>
+        <td>Sem</td>
+        <td>{{student.sem}}</td>
+    </tr>
+    <tr>
+        <td>CGPA</td>
+        <td>{{student.cgpa}}</td>
+    </tr>
+</table>
+<table class="styled-table">
+    <thead>
+        <tr>
+            <th colspan="2">Guide Details</th>
+        </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>Name</td>
+        <td>{{ prof.name }}</td>
+    </tr>
+    <tr>
+        <td>Email</td>
+        <td>{{prof.email}}</td>
+    </tr>
+    <tr>
+        <td>Phone number</td>
+        <td>{{prof.phone_no}}</td>
+    </tr>
+    
+</tbody>
+</table>
 </div>
-<script>
-    function show()
-    {
-        var x = document.getElementById("myDIV");
-        if (x.style.display === "none") {
-        x.style.display = "block";
-        }
-        else {
-        x.style.display = "none";
-        }
-    }
-</script>
+<div style="text-align: center;">
+    <a href="/student" 
+ style="
+ text-decoration: none;
+    margin-block: 2vh;
+    color: white;
+    -webkit-appearance: button;
+            -moz-appearance: button;
+            appearance: button;
+            background-color: #27447e;
+            text-decoration: none;
+            
+            border-radius: 8px;
+            padding: 4px 8px;
+            margin-right: 2vw;">Home</a>
+</div>
+
+
+{%endblock%}
