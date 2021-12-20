@@ -82,6 +82,7 @@ text-align: center;
 <p>
     {{rubrics_eval.usn}} 
     <h2 style="text-align: center;">Marks of students under your guidance</h2>
+    <div style="text-align: center;display: flex;justify-content: center;">
     <table class="styled-table">
         <thead>
             <tr>
@@ -100,9 +101,7 @@ text-align: center;
             {% endfor %} 
         </tbody>
     </table>
+</div>
 </p>
 {%endif%}
-<a href="//localhost:8000/professor/details/student">Details</a>
-<a href="//localhost:8000/professor/details">Prof Details</a>
-
 {%endblock%}
