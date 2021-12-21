@@ -6,6 +6,8 @@ from . import views
 urlpatterns=[
     path('details/',views.details,name="details"),
     path('details/student',views.stu_details,name="stu_det"),
-    path('marks/',views.marks,name="marks")
+    path('marks/',views.marks,name="marks"),
+    path('panelist/',views.panelist,name="panelist"),
+    path('panelist/pmarks/',views.panelistEntry,name="panelistMarks")
     
 ]

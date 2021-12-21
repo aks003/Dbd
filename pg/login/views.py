@@ -72,6 +72,7 @@ def login_view(request):
             else:
                 return redirect('/professor/details')
         else:
+            messages.error(request, f'Your username or password is wrong')
             return render(request,'login/login.html')
     form = UserRegisterForm()
     return render(request,'login/login.html',{'form':form,'rd':False})

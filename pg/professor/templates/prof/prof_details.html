@@ -21,8 +21,8 @@ justify-content: center;">
         <thead>
             <tr>
                 <th>Name</th>
-                <th>Email</th>
                 <th>Phone</th>
+                <th>Email</th>
             </tr>
         </thead>
         <tbody>
@@ -36,5 +36,26 @@ justify-content: center;">
         </tbody>
     </table>
 </div>
+<<<<<<< Updated upstream
 </div>
+=======
+
+<a href="/professor/details">Details</a>
+<a href="/professor/marks">Marks</a>
+{% if role == "PANELIST-IT" or role == "PANELIST-SE" %}
+<a href="{% url 'panelist' %}">Panelist</a>
+{% endif %}
+<script>
+    function show()
+    {
+        var x = document.getElementById("myDIV");
+        if (x.style.display === "block") {
+        x.style.display = "none";
+        }
+        else {
+        x.style.display = "block";
+        }
+    }
+</script>
+>>>>>>> Stashed changes
 {%endblock%}

@@ -6,9 +6,9 @@ from django.db import models
 class professor_db(models.Model):
     name=models.CharField(max_length=50)
     prof_id=models.CharField(max_length=10,primary_key=True)
-    role=models.CharField(max_length=10)
+    role=models.CharField(max_length=11)
     email=models.EmailField()
-    phone_no=models.BigIntegerField()
+    phone_no=models.CharField(max_length=10)
 
     def __str__(self):
         return self.prof_id
@@ -17,7 +17,7 @@ class student_db(models.Model):
     name=models.CharField(max_length=50, null=True)
     email=models.EmailField(max_length=100)
     usn=models.CharField(primary_key=True,max_length=10)
-    phone_no=models.BigIntegerField()
+    phone_no=models.CharField(max_length=10)
     sem=models.PositiveSmallIntegerField()
     cgpa=models.DecimalField(max_digits=4,decimal_places=2,null=True)
     branch=models.CharField(max_length=2, null=True)
@@ -27,7 +27,7 @@ class student_db(models.Model):
 
 class project_db(models.Model):
     domain=models.CharField(max_length=20, null=True)
-    proj_name=models.CharField(max_length=20,primary_key=True)
+    proj_name=models.CharField(max_length=256,primary_key=True)
     stu_usn=models.ForeignKey(student_db,on_delete=models.SET_NULL,null=True)
     
     class Meta:
@@ -86,12 +86,19 @@ class rubrics_evaluation_db(models.Model):
     prof=models.ForeignKey(professor_db,on_delete=models.DO_NOTHING)
     rubrics=models.ForeignKey(rubrics_db,on_delete=models.DO_NOTHING)
     r_marks_obtained=models.DecimalField(max_digits=4,decimal_places=2)
+
     class Meta:
         constraints = [
             models.UniqueConstraint(fields=['usn', 'prof','rubrics'], name='r_eval')
         ]
+<<<<<<< Updated upstream
     def __str__(self):
         return f"%s-%s-%s" % (self.usn, self.prof , self.ruberics)
+=======
+        
+    def __str__(self):
+        return f"%s-%s-%s" % (self.usn, self.prof,self.rubrics)
+>>>>>>> Stashed changes
 
 class evaluation_db(models.Model):
     usn=models.ForeignKey(student_db,on_delete=models.CASCADE)
