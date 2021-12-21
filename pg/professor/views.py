@@ -26,6 +26,11 @@ def marks(request):
             rubrics= rubrics_db.objects.all()
             phase=rubrics.first().phase_id
             rubrics_eval=rubrics_evaluation_db.objects.all().filter(usn=usn,prof_id=prof_id)
+            try:
+                deliverables=deliverables_db.objects.all().filter(usn=usn,phase_id=phase)
+            except:
+                deliverables=[]
+
             return render(request,'prof/marks1.html',{
                 'prof':prof,
                 'usn':usn,

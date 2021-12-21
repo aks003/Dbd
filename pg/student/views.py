@@ -42,8 +42,7 @@ def deliverables(request):
         else:
             print('hi')
             print(request.POST['phase_id'])
-            form = DeliverablesForm(request.POST)
-            
+            form = DeliverablesForm(request.POST)  
             obj = deliverables_db.objects.filter(usn=student1,phase_id=request.POST['phase_id']).first()
             print(obj)
             if obj: 
@@ -80,9 +79,10 @@ def deliverables(request):
 def finalMarks(request):
     usn=student_db.objects.get(email=request.user.email)
     rubrics=rubrics_evaluation_db.objects.filter(usn=usn)
+    print(rubrics)
     guide=usn.prof_id
     role=professor_db.objects.get(prof_id=guide).role
-    print(guide)
+    phase=""
     marks={}
     for i in rubrics:
         s=i.rubrics
@@ -90,6 +90,7 @@ def finalMarks(request):
         # print(i.prof)
         ind=s.find('-')
         phase=s[:ind+2]
+        print(phase)
         marks_obtained=i.r_marks_obtained
         t2=0
         if "PANELIST" in role and i.prof == guide:
@@ -100,10 +101,10 @@ def finalMarks(request):
         else:
             temp=marks.get(phase)
             marks[phase]=[temp[0]+marks_obtained,temp[1]+1+t2]
-    if(marks.get(phase)[1] == 6):
+    if(len(rubrics)>0 and marks.get(phase)[1] == 12):
         print(marks.get(phase)[0])
         ans=marks.get(phase)[0]//marks.get(phase)[1]
-        ans=float(ans)*2.5
+        ans=float(ans)*2
         phase_obj=phase_db.objects.get(category=phase[:-2], phase_number=phase[-1])
         if evaluation_db.objects.filter(usn=usn,phase_id=phase_obj).first() is None:
             evaluation_db(usn=usn,prof_id=None,phase_id=phase_obj,marks=ans).save()

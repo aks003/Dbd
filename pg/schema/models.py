@@ -91,14 +91,9 @@ class rubrics_evaluation_db(models.Model):
         constraints = [
             models.UniqueConstraint(fields=['usn', 'prof','rubrics'], name='r_eval')
         ]
-<<<<<<< Updated upstream
-    def __str__(self):
-        return f"%s-%s-%s" % (self.usn, self.prof , self.ruberics)
-=======
         
     def __str__(self):
         return f"%s-%s-%s" % (self.usn, self.prof,self.rubrics)
->>>>>>> Stashed changes
 
 class evaluation_db(models.Model):
     usn=models.ForeignKey(student_db,on_delete=models.CASCADE)
