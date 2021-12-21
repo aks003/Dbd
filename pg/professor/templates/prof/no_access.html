@@ -1,0 +1,5 @@
+{% extends "prof/base.html" %}
+{%block body%}
+<h1>You are not allowed access here</h1>
+<a href="{{ request.META.HTTP_REFERER }}"></a>
+{% endblock %}

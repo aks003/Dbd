@@ -1,0 +1,55 @@
+{% extends "prof/base.html" %}
+{%block body%}
+<style>
+        .styled-table {
+    border-collapse: collapse;
+    margin: 25px 0;
+    font-size: 0.9em;
+    font-family: sans-serif;
+    min-width: 400px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+}
+.styled-table thead tr {
+    background-color: #27447e;
+    color: #ffffff;
+    text-align: left;
+}
+.styled-table th,
+.styled-table td {
+    padding: 12px 15px;
+}
+.styled-table tbody tr {
+    border-bottom: 1px solid #dddddd;
+}
+
+.styled-table tbody tr:nth-of-type(even) {
+    background-color: #f3f3f3;
+}
+
+.styled-table tbody tr:last-of-type {
+    border-bottom: 2px solid #27447e;
+}
+</style>
+<h1>Welcome Panelist {{prof.name}}</h1>
+<h2>Branch : {{branch}}</h2>
+<h2>Student List : (Click on the student name to enter their marks)</h2>
+<table class="styled-table">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Phone</th>
+            <th>Email</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for a in stu %}
+        <tr>
+            <td><a href="pmarks?mark={{a.usn}}">{{a.name}}</a></td>
+            <td><p>{{a.phone_no}}</p></td>
+            <td>{{a.email}}</td>
+        </tr>
+        {%endfor%}
+    </tbody>
+</table>
+<a href="{% url 'details' %}">Back</a>
+{%endblock%}
