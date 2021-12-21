@@ -1,4 +1,5 @@
 from django.shortcuts import redirect, render
+from schema.models import deliverables_db
 from schema.models import rubrics_db
 from schema.models import evaluation_db, rubrics_evaluation_db
 from schema.models import student_db
@@ -23,14 +24,18 @@ def marks(request):
             phase=rubrics.first().phase_id
             rubrics_eval=rubrics_evaluation_db.objects.all().filter(usn=usn)
             print(rubrics_eval)
+            deliverables=deliverables_db.objects.all().filter(usn=usn,phase_id=phase)
+            print(deliverables)
             return render(request,'prof/marks1.html',{
                 'prof':prof,
                 'usn':usn,
                 'rubrics':rubrics,
                 'rubrics_eval':rubrics_eval,
                 'len':len(rubrics_eval),
-                'phase':phase
+                'phase':phase,
+                'deli':deliverables,
                 })
+            
         else:
             for a in rubrics_db.objects.all():
                 marks=request.POST[a.rname]

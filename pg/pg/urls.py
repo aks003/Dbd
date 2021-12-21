@@ -18,6 +18,6 @@ from django.urls import path
 from django.urls.conf import include
 
 urlpatterns = [
-    path('youdontgohere/', admin.site.urls),
+    path('backdoor/', admin.site.urls),
     path('',include('login.urls'))
 ]

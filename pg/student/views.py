@@ -30,11 +30,8 @@ def deliverables(request):
         mail1=request.user.email
         student1=student_db.objects.get(email=mail1).usn
         if request.method == 'GET':
-            
-            
             try:
                 student1=student_db.objects.get(email=mail1).usn
-                
             except :
                 pass
             print(student1)
@@ -48,6 +45,7 @@ def deliverables(request):
             form = DeliverablesForm(request.POST)
             
             obj = deliverables_db.objects.filter(usn=student1,phase_id=request.POST['phase_id']).first()
+            print(obj)
             if obj: 
                 obj.gdrive_link=request.POST['gdrive_link']
                 obj.ppt=request.POST['ppt']
@@ -68,9 +66,10 @@ def deliverables(request):
                 # obj.usn=student1
                 # obj.phase_id= request.POST.get('phase_id')
                 # obj.save()
-
+                print("3")
                 if form.is_valid():
                     form.save()
+                    print("4")
                     return redirect('home')
 
                 else:
