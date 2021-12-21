@@ -1,9 +1,19 @@
 {%extends 'student/base.html'%}
 {% block body %}
-<p>USN : {{usn}}</p>
+<div style="
+text-align: center;
+font-weight: bold;
+font-size: larger;
+">
+
+
+<p>Name: {{usn.name}}</p>
+<p>USN : {{usn.usn}}</p>
+<p>Branch: {{usn.branch}}</p>
 {% if marks != 0 %}
     <p>The marks you have obtained in {{phase}} is {{marks}}/100</p>
 {% else %}
     <p>Marks is yet to be generated</p>
 {% endif %}
+</div>
 {% endblock %}

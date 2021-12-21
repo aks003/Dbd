@@ -30,6 +30,20 @@
 .styled-table tbody tr:last-of-type {
     border-bottom: 2px solid #27447e;
 }
+.menu a{
+        text-decoration: none;
+        margin-block: 2vh;
+        color: white;
+        -webkit-appearance: button;
+                -moz-appearance: button;
+                appearance: button;
+                background-color: #27447e;
+                text-decoration: none;
+                
+                border-radius: 8px;
+                padding: 4px 8px;
+                margin-right: 2vw;
+    }
 </style>
 {%if len == 0%}
 <form method="POST" style="
@@ -82,6 +96,10 @@ text-align: center;
 </form>
 {%else%}
 <p>
+    <div style="
+    display: flex;
+    flex-direction: column;
+">
     {{rubrics_eval.usn}} 
     <h2 style="text-align: center;">Marks of the student</h2>
     <table class="styled-table">
@@ -102,7 +120,9 @@ text-align: center;
             {% endfor %} 
         </tbody>
     </table>
+</div>
 </p>
 {%endif%}
-<a href="{% url 'panelist' %}">Back</a>
+<div class="menu" style="text-align: center;"><a href="{% url 'panelist' %}">Back</a></div>
+
 {% endblock %}

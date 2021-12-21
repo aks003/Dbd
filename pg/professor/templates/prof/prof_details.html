@@ -1,6 +1,21 @@
 {% extends "prof/base.html" %}
 {%block body%}
-
+<style>
+    .menu a{
+        text-decoration: none;
+        margin-block: 2vh;
+        color: white;
+        -webkit-appearance: button;
+                -moz-appearance: button;
+                appearance: button;
+                background-color: #27447e;
+                text-decoration: none;
+                
+                border-radius: 8px;
+                padding: 4px 8px;
+                margin-right: 2vw;
+    }
+    </style>
 <div style="
 display: flex;
 flex-direction: column;
@@ -37,11 +52,15 @@ justify-content: center;">
     </table>
 </div>
 </div>
-
-<a href="/professor/details">Details</a>
+<div class="menu" style="
+display: flex;
+justify-content: space-evenly;
+">
+<a href="/professor/details" >Details</a>
 <a href="/professor/marks">Marks</a>
 {% if role == "PANELIST-IT" or role == "PANELIST-SE" %}
 <a href="{% url 'panelist' %}">Panelist</a>
+</div>
 {% endif %}
 <script>
     function show()

@@ -30,6 +30,11 @@
     border-bottom: 2px solid #27447e;
 }
 </style>
+<div style="
+display: flex;
+flex-direction: column;
+text-align: center;
+">
 <h1>Welcome Panelist {{prof.name}}</h1>
 <h2>Branch : {{branch}}</h2>
 <h2>Student List : (Click on the student name to enter their marks)</h2>
@@ -51,5 +56,5 @@
         {%endfor%}
     </tbody>
 </table>
-<a href="{% url 'details' %}">Back</a>
+</div>
 {%endblock%}
