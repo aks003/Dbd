@@ -6,5 +6,11 @@ from . import views
 
 urlpatterns=[
     path('',views.home,name="home"),
+    path('studentDetails',views.studentDetails,name="stuDetail"),
+    path('professorDetails',views.professorDetails,name="profDetails"),
+    path('marks',views.marks,name="marks"),
+    path('marksInDetail',views.marksInDetail,name="marksInDetail"),
+    path('autoComplete',views.autocomplete,name="autoComplete"),
+    path('graph',views.graph,name="graph")
 ]
 

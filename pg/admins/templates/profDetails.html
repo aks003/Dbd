@@ -1,0 +1,173 @@
+{%extends "base.html"%} {%block body%}
+<style>
+  .styled-table {
+    border-collapse: collapse;
+    margin: 25px 0;
+    font-size: 0.9em;
+    font-family: sans-serif;
+    min-width: 400px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+  }
+  .styled-table thead tr {
+    background-color: #27447e;
+    color: #ffffff;
+    text-align: left;
+  }
+  .styled-table th,
+  .styled-table td {
+    padding: 12px 15px;
+  }
+  .styled-table tbody tr {
+    border-bottom: 1px solid #dddddd;
+  }
+
+  .styled-table tbody tr:nth-of-type(even) {
+    background-color: #f3f3f3;
+  }
+
+  .styled-table tbody tr:last-of-type {
+    border-bottom: 2px solid #27447e;
+  }
+  .menu a {
+    text-decoration: none;
+    margin-block: 2vh;
+    color: white;
+    -webkit-appearance: button;
+    -moz-appearance: button;
+    appearance: button;
+    background-color: #27447e;
+    text-decoration: none;
+
+    border-radius: 8px;
+    padding: 4px 8px;
+    margin-right: 2vw;
+  }
+
+  .form {
+    text-align: center;
+  }
+  input {
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    resize: vertical;
+  }
+
+  .button {
+    display: inline-block;
+    padding: 0.7em 1.7em;
+    margin: 0 0.3em 0.3em 0;
+    border-radius: 0.2em;
+    box-sizing: border-box;
+    text-decoration: none;
+    font-family: "Roboto", sans-serif;
+    font-weight: 400;
+    color: #ffffff;
+    background-color: #3369ff;
+    box-shadow: inset 0 -0.6em 1em -0.35em rgba(0, 0, 0, 0.17),
+      inset 0 0.6em 2em -0.3em rgba(255, 255, 255, 0.15),
+      inset 0 0 0em 0.05em rgba(255, 255, 255, 0.12);
+    text-align: center;
+    position: relative;
+  }
+  button:active {
+    box-shadow: inset 0 0.6em 2em -0.3em rgba(0, 0, 0, 0.15),
+      inset 0 0 0em 0.05em rgba(255, 255, 255, 0.12);
+  }
+  @media all and (max-width: 30em) {
+    a.button7 {
+      display: block;
+      margin: 0.4em auto;
+    }
+  }
+
+  .form a {
+    text-decoration: none;
+    margin-block: 2vh;
+    color: white;
+    -webkit-appearance: button;
+    -moz-appearance: button;
+    appearance: button;
+    background-color: #27447e;
+    text-decoration: none;
+
+    border-radius: 8px;
+    padding: 4px 8px;
+    margin-right: 2vw;
+  }
+
+  .error {
+    color: red;
+    text-align: center;
+    font-size: 30px;
+  }
+</style>
+<body>
+  <h2 style="text-align: center">Professor Details</h2>
+  <form method="post">
+    {% csrf_token %}
+    <div class="form">
+      <input
+        name="prid"
+        value="{{ prof_id }}"
+        placeholder="Prof ID"
+        id="prid"
+      />
+      <input name="name" value="{{ name }}" placeholder="Prof Name" id="name" />
+      <button type="submit" class="button">Search</button>
+      <a href="{% url 'profDetails' %}">Clear Filters</a>
+    </div>
+  </form>
+  <p class="error">{{error}}</p>
+  <hr />
+  <div style="text-align: center; display: flex; justify-content: center">
+    <table class="styled-table">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Prof ID</th>
+          <th>Phone no</th>
+          <th>Role</th>
+          <th>Guidee</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for i,j in obj.items %}
+        <tr>
+          <td>{{ i.name }}</td>
+          <td>{{ i.email }}</td>
+          <td>{{ i.prof_id }}</td>
+          <td>{{ i.phone_no }}</td>
+          <td>{{ i.role }}</td>
+          <td>{% for k in j %}{{k}}&nbsp;&nbsp;{% endfor %}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</body>
+<script>
+  $(function () {
+    $("#prid").autocomplete({
+      source: '{% url 'profDetails' %}',
+      open: function(){
+                    setTimeout(function () {
+                        $('.ui-autocomplete').css('z-index', 99);
+                    }, 0);
+                }
+    });
+  });
+  $(function () {
+    $("#name").autocomplete({
+      source: '{% url 'autoComplete' %}',
+      open: function(){
+                    setTimeout(function () {
+                        $('.ui-autocomplete').css('z-index', 99);
+                    }, 0);
+                }
+    });
+  });
+</script>
+{%endblock%}

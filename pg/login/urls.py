@@ -11,6 +11,6 @@ urlpatterns=[
     path('signup/',views.signup,name="signup"),
     path('student/',include('student.urls')),
     path('professor/',include('professor.urls')),
-    path('admin/',include('admins.urls'))
+    path('admins/',include('admins.urls'))
 ]
 

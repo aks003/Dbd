@@ -1,0 +1,207 @@
+{%extends "base.html"%} {%block body%}
+<style>
+  .styled-table {
+    border-collapse: collapse;
+    margin: 25px 0;
+    font-size: 0.9em;
+    font-family: sans-serif;
+    min-width: 400px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+  }
+  .styled-table thead tr {
+    background-color: #27447e;
+    color: #ffffff;
+    text-align: left;
+  }
+  .styled-table th,
+  .styled-table td {
+    padding: 12px 15px;
+  }
+  .styled-table tbody tr {
+    border-bottom: 1px solid #dddddd;
+  }
+
+  .styled-table tbody tr:nth-of-type(even) {
+    background-color: #f3f3f3;
+  }
+
+  .styled-table tbody tr:last-of-type {
+    border-bottom: 2px solid #27447e;
+  }
+  .menu a {
+    text-decoration: none;
+    margin-block: 2vh;
+    color: white;
+    -webkit-appearance: button;
+    -moz-appearance: button;
+    appearance: button;
+    background-color: #27447e;
+    text-decoration: none;
+
+    border-radius: 8px;
+    padding: 4px 8px;
+    margin-right: 2vw;
+  }
+  table {
+    empty-cells: show;
+  }
+  .form {
+    text-align: center;
+  }
+  input {
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    resize: vertical;
+  }
+
+  .button {
+    display: inline-block;
+    padding: 0.7em 1.7em;
+    margin: 0 0.3em 0.3em 0;
+    border-radius: 0.2em;
+    box-sizing: border-box;
+    text-decoration: none;
+    font-family: "Roboto", sans-serif;
+    font-weight: 400;
+    color: #ffffff;
+    background-color: #3369ff;
+    box-shadow: inset 0 -0.6em 1em -0.35em rgba(0, 0, 0, 0.17),
+      inset 0 0.6em 2em -0.3em rgba(255, 255, 255, 0.15),
+      inset 0 0 0em 0.05em rgba(255, 255, 255, 0.12);
+    text-align: center;
+    position: relative;
+  }
+  button:active {
+    box-shadow: inset 0 0.6em 2em -0.3em rgba(0, 0, 0, 0.15),
+      inset 0 0 0em 0.05em rgba(255, 255, 255, 0.12);
+  }
+  @media all and (max-width: 30em) {
+    a.button7 {
+      display: block;
+      margin: 0.4em auto;
+    }
+  }
+
+  .form a {
+    text-decoration: none;
+    margin-block: 2vh;
+    color: white;
+    -webkit-appearance: button;
+    -moz-appearance: button;
+    appearance: button;
+    background-color: #27447e;
+    text-decoration: none;
+
+    border-radius: 8px;
+    padding: 4px 8px;
+    margin-right: 2vw;
+  }
+
+  .error {
+    color: red;
+    text-align: center;
+    font-size: 30px;
+  }
+</style>
+<body>
+  <h1 style="text-align: center">Marks In Detail</h1>
+  <form method="post">
+    {% csrf_token %}
+    <div class="form">
+      <input name="usn" value="{{ usn }}" placeholder="USN" id="usn" />
+      <button type="submit" class="button">Search</button>
+      <a href="{% url 'marksInDetail' %}">Clear Filters</a>
+    </div>
+  </form>
+  <p class="error">{{error}}</p>
+  <hr />
+  <h2 style="text-align: center">IT students</h2>
+  <div style="text-align: center; display: flex; justify-content: center">
+    <table class="styled-table">
+      <thead>
+        <tr>
+          <th>Student</th>
+          <th>Category</th>
+          <th>Phase number</th>
+          <th>Rubrics Name</th>
+          <th>Max Marks</th>
+          {% for prof in it_profs %}
+          <th>{{prof}}</th>
+          {% endfor %}
+        </tr>
+      </thead>
+      <tbody>
+        {% for key,values in it_obj.items %} {% for i in values %}
+        <tr>
+          <td>{{key.0}}</td>
+          <td>{{ i.0 }}</td>
+          <td>{{ i.1 }}</td>
+          <td>{{ i.2 }}</td>
+          <td>{{ i.3 }}</td>
+          <td>{{ i.4 }}</td>
+          <td>{{ i.5 }}</td>
+          <td>{{ i.6 }}</td>
+          <td>{{ i.7 }}</td>
+        </tr>
+        {% endfor %}
+        <tr>
+          <td colspan="9">&nbsp;</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  <br />
+  <h2 style="text-align: center">SE students</h2>
+  <div style="text-align: center; display: flex; justify-content: center">
+    <table class="styled-table">
+      <thead>
+        <tr>
+          <th>Student</th>
+          <th>Category</th>
+          <th>Phase number</th>
+          <th>Rubrics Name</th>
+          <th>Max Marks</th>
+          {% for prof in se_profs %}
+          <th>{{prof}}</th>
+          {% endfor %}
+        </tr>
+      </thead>
+      <tbody>
+        {% for key,values in se_obj.items %} {% for i in values %}
+        <tr>
+          <td>{{key.0}}</td>
+          <td>{{ i.0 }}</td>
+          <td>{{ i.1 }}</td>
+          <td>{{ i.2 }}</td>
+          <td>{{ i.3 }}</td>
+          <td>{{ i.4 }}</td>
+          <td>{{ i.5 }}</td>
+          <td>{{ i.6 }}</td>
+          <td>{{ i.7 }}</td>
+        </tr>
+        {% endfor %}
+        <tr>
+          <td colspan="9">&nbsp;</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</body>
+<script>
+  $(function () {
+    $("#usn").autocomplete({
+      source: '{% url 'stuDetail' %}',
+      minLength:3,
+      open: function(){
+                    setTimeout(function () {
+                        $('.ui-autocomplete').css('z-index', 99);
+                    }, 0);
+                }
+    });
+  });
+</script>
+{%endblock%}

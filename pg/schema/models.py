@@ -32,7 +32,7 @@ class project_db(models.Model):
     
     class Meta:
         constraints = [
-            models.UniqueConstraint(fields=['proj_name', 'stu_usn'], name='idiot4')
+            models.UniqueConstraint(fields=['proj_name', 'stu_usn'], name='projdb')
         ]
     def __str__(self):
         return f"%s-%s" % (self.domain, self.proj_name)
@@ -47,7 +47,7 @@ class phase_db(models.Model):
     
     class Meta:
         constraints = [
-            models.UniqueConstraint(fields=['category', 'phase_number'], name='idiot1')
+            models.UniqueConstraint(fields=['category', 'phase_number'], name='phasedb')
         ]
 
 class deliverables_db(models.Model):
@@ -62,7 +62,7 @@ class deliverables_db(models.Model):
     
     class Meta:
         constraints = [
-            models.UniqueConstraint(fields=['usn', 'phase_id'], name='idiot')
+            models.UniqueConstraint(fields=['usn', 'phase_id'], name='deldb')
         ]
     
 
@@ -75,7 +75,7 @@ class rubrics_db(models.Model):
     rnumber=models.IntegerField()
     class Meta:
         constraints = [
-            models.UniqueConstraint(fields=['rname', 'phase_id'], name='idiot2')
+            models.UniqueConstraint(fields=['rname', 'phase_id'], name='rbd')
         ]
     
     def __str__(self):
@@ -104,7 +104,7 @@ class evaluation_db(models.Model):
     unique_together = [['usn', 'phase_id']]
     class Meta:
         constraints = [
-            models.UniqueConstraint(fields=['usn', 'phase_id'], name='idiot3')
+            models.UniqueConstraint(fields=['usn', 'phase_id'], name='evaldb')
         ]
     def __str__(self):
         return f"%s-%s" % (self.usn, self.phase_id)

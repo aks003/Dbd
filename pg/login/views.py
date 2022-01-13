@@ -67,7 +67,9 @@ def login_view(request):
         if user is not None:
             login(request, user)
             mail=user.email
-            if user.is_student:
+            if user.is_student and user.is_teacher:
+                return redirect('/admins')
+            elif user.is_student:
                 return redirect('/student')
             else:
                 return redirect('/professor/details')

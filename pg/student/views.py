@@ -79,32 +79,33 @@ def deliverables(request):
 def finalMarks(request):
     usn=student_db.objects.get(email=request.user.email)
     rubrics=rubrics_evaluation_db.objects.filter(usn=usn)
-    print(rubrics)
     guide=usn.prof_id
     role=professor_db.objects.get(prof_id=guide).role
     phase=""
     marks={}
+    max_marks=0
     for i in rubrics:
         s=i.rubrics
         s=str(s)
         # print(i.prof)
+        max_marks+=float(s[-5:])
         ind=s.find('-')
         phase=s[:ind+2]
-        print(phase)
         marks_obtained=i.r_marks_obtained
         t2=0
         if "PANELIST" in role and i.prof == guide:
             marks_obtained*=2
+            max_marks+=float(s[-5:])
             t2=1
         if marks.get(phase) is None:
             marks[phase]=[marks_obtained,1+t2]
         else:
             temp=marks.get(phase)
             marks[phase]=[temp[0]+marks_obtained,temp[1]+1+t2]
-    if(len(rubrics)>0 and marks.get(phase)[1] == 12):
-        print(marks.get(phase)[0])
-        ans=marks.get(phase)[0]//marks.get(phase)[1]
-        ans=float(ans)*2
+    if(len(rubrics)>0 and marks.get(phase)[1] == 6):
+        print(marks.get(phase)[0],max_marks)
+        ans=float(marks.get(phase)[0])/max_marks
+        ans=float(ans)*100
         phase_obj=phase_db.objects.get(category=phase[:-2], phase_number=phase[-1])
         if evaluation_db.objects.filter(usn=usn,phase_id=phase_obj).first() is None:
             evaluation_db(usn=usn,prof_id=None,phase_id=phase_obj,marks=ans).save()
