@@ -1,9 +1,35 @@
 {%extends "base.html"%} {%block body%}
-<h1>This is admin Page</h1>
-<a href="/admins/studentDetails">Student Details</a>
-<a href="/admins/professorDetails">Professor Details</a>
-<a href="/admins/marks">Marks Overview</a>
-<a href="/admins/marksInDetail">Marks In Detail</a>
-<a href="/admins/graph">Graph</a>
-<a href="#">ML</a>
+<style>
+  .menu a {
+    text-decoration: none;
+    margin-block: 2vh;
+    color: white;
+    -webkit-appearance: button;
+    -moz-appearance: button;
+    appearance: button;
+    background-color: #27447e;
+    text-decoration: none;
+
+    border-radius: 8px;
+    padding: 4px 8px;
+    margin-right: 2vw;
+  }
+</style>
+<div
+  style="
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-decoration: none;
+  "
+  class="menu"
+>
+  <h1>Welcome Admin</h1>
+  <a href="#">ML</a>
+  <a href="/admins/graph">Graph</a>
+  <a href="/admins/studentDetails">Student Details</a>
+  <a href="/admins/professorDetails">Professor Details</a>
+  <a href="/admins/marks">Marks Overview</a>
+  <a href="/admins/marksInDetail">Marks In Detail</a>
+</div>
 {%endblock%}

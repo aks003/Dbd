@@ -1,7 +1,7 @@
 from typing import Reversible
 from django.http.response import HttpResponseRedirect
 from django.shortcuts import redirect, render
-from schema.models import student_db, professor_db, evaluation_db, rubrics_evaluation_db
+from schema.models import phase_db, rubrics_db, student_db, professor_db, evaluation_db, rubrics_evaluation_db
 from django.db.models import Q
 from django.views.generic import View
 from django.http import JsonResponse
@@ -286,7 +286,6 @@ def marksInDetail(request):
     
         #d[usn]
     # d={"name":["Akash","Vats"]}
-    print(d)
     prof_se.append("GUIDE")
     context={
         "it_obj":d,
@@ -306,5 +305,17 @@ def autocomplete(request):
             name.append(obj.name)
         return JsonResponse(name,safe=False)
     
-def graph(request,*args,**kwargs):
-    return render(request,'charts.html',{})
+def graph(request):
+    select_value="Minor Project-1"
+    if request.method == 'POST':
+        select_value = request.POST.get('phase_id')
+    l=[]
+    for obj in evaluation_db.objects.filter(phase_id__category=select_value[:-2],phase_id__phase_number=select_value[-1]).order_by('usn'):
+        l.append(obj)
+    r=[]
+    for obj in rubrics_db.objects.filter(phase_id__category=select_value[:-2],phase_id__phase_number=select_value[-1]):
+        r.append(obj)
+    p=[]
+    for obj in phase_db.objects.filter():
+        p.append(obj)
+    return render(request,'charts.html',{"objs":l,"robjs":r,"pobjs":p,"disp":select_value})
