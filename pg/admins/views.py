@@ -5,6 +5,11 @@ from schema.models import phase_db, rubrics_db, student_db, professor_db, evalua
 from django.db.models import Q
 from django.views.generic import View
 from django.http import JsonResponse
+from django.core.files.storage import FileSystemStorage
+from django.http import HttpResponse
+from django.template.loader import render_to_string
+from weasyprint import HTML
+
 import re
 # Create your views here.
 def home(request):
@@ -319,3 +324,57 @@ def graph(request):
     for obj in phase_db.objects.filter():
         p.append(obj)
     return render(request,'charts.html',{"objs":l,"robjs":r,"pobjs":p,"disp":select_value})
+
+def printPDF1(request):
+    usn=''
+    error=''
+    flag=True
+    if request.method == 'POST':
+        usn=request.POST.get('usn')
+        if len(usn)!=0:
+            regex_name = re.compile(r'^(1RV)[0-9]{2}[A-Z]{3}[0-9]{2}$')
+            res = regex_name.search(usn)
+            if not res:
+                flag=False
+                error="Wrong input!"
+    objects=student_db.objects.filter(branch='IT')
+    if flag and (len(usn)>0):
+        objects=student_db.objects.filter(branch='IT',usn=usn)
+    it=[]
+    for student in objects:
+        eval_list=list(evaluation_db.objects.filter(usn=student.usn))
+        marks=""
+        if len(eval_list) == 0:
+            it.append([student.usn,student.name,"-","-","Not generated"])
+        for i in eval_list:
+            marks=str(i.marks)
+            it.append([student.usn,student.name,i.phase_id.category,i.phase_id.phase_number,marks])
+    
+    objects=student_db.objects.filter(branch='SE')
+    if flag and (len(usn)>0):
+        objects=student_db.objects.filter(branch='SE',usn=usn)
+    se=[]
+    for student in objects:
+        eval_list=list(evaluation_db.objects.filter(usn=student.usn))
+        marks=""
+        if len(eval_list) == 0:
+            se.append([student.usn,student.name,"-","-","Not generated"])
+        for i in eval_list:
+            marks=str(i.marks)
+            se.append([student.usn,student.name,i.phase_id.category,i.phase_id.phase_number,marks])
+    context={
+        "it":it,
+        "se":se,
+        "usn":usn,
+        "error":error
+    }
+    html_string = render_to_string('printPDF1.html',context)
+
+    html = HTML(string=html_string)
+    html.write_pdf(target='/tmp/mypdf.pdf');
+
+    fs = FileSystemStorage('/tmp')
+    with fs.open('mypdf.pdf') as pdf:
+        response = HttpResponse(pdf, content_type='application/pdf')
+        response['Content-Disposition'] = 'attachment; filename="mypdf.pdf"'
+        return response

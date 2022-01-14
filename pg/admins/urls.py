@@ -11,6 +11,7 @@ urlpatterns=[
     path('marks',views.marks,name="marks"),
     path('marksInDetail',views.marksInDetail,name="marksInDetail"),
     path('autoComplete',views.autocomplete,name="autoComplete"),
-    path('graph',views.graph,name="graph")
+    path('graph',views.graph,name="graph"),
+    path('printPDF1',views.printPDF1,name="printPDF1"),
 ]
 
