@@ -29,7 +29,7 @@ text-align: center;
             <tr>
                 <td><p>{{a.rname}}</p></td>
                 <td><p>{{a.r_max_marks}}</p></td>
-                <td><input type="number" id="quantity" name="{{a.rname}}" max="{{a.r_max_marks}}"></td>
+                <td><input type="number" id="quantity" name="{{a.rname}}" min="0.0" max="{{a.r_max_marks}}"></td>
             </tr>
             {%endfor%}
         </tbody>
@@ -64,15 +64,15 @@ justify-content: center;
         {%for a in deli%}
         <tr>
             <td>Report</td>
-            <td>{{a.report}}</td>
+            <td><a href="{{a.report}}">{{a.report}}</a></td>
         </tr>
         <tr>
             <td>PPT</td>
-            <td>{{a.ppt}}</td>
+            <td><a href="{{a.ppt}}">{{a.ppt}}</a></td>
         </tr>
         <tr>
             <td>G-Drive</td>
-            <td>{{a.gdrive_link}}</td>
+            <td><a href="{{a.gdrive_link}}">{{a.gdrive_link}}</a></td>
         </tr>
         {%endfor%}
     </tbody>
