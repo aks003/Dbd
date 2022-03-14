@@ -74,7 +74,7 @@ text-align: center;
             <tr>
                 <td><p>{{a.rname}}</p></td>
                 <td><p>{{a.r_max_marks}}</p></td>
-                <td><input type="number" id="quantity" name="{{a.rname}}" max="{{a.r_max_marks}}"></td>
+                <td><input type="number" id="quantity" name="{{a.rname}}" min="0.0" max="{{a.r_max_marks}}"></td>
             </tr>
             {%endfor%}
         </tbody>

@@ -1,6 +1,7 @@
 {%extends "base.html"%} {%block body%}
 <style>
-  .menu a {
+  .menu a,
+  #cbt {
     text-decoration: none;
     margin-block: 2vh;
     color: white;
@@ -25,11 +26,36 @@
   class="menu"
 >
   <h1>Welcome Admin</h1>
-  <a href="#">ML</a>
   <a href="/admins/graph">Graph</a>
   <a href="/admins/studentDetails">Student Details</a>
   <a href="/admins/professorDetails">Professor Details</a>
   <a href="/admins/marks">Marks Overview</a>
   <a href="/admins/marksInDetail">Marks In Detail</a>
 </div>
+<div style="display: flex; flex-direction: column; align-items: flex-end">
+  <div id="chatbot" class="menu1" style="display: none">
+    <iframe
+      width="450"
+      height="550"
+      allow="microphone;"
+      src="https://console.dialogflow.com/api-client/demo/embedded/f5ced958-e90f-4b37-a87e-aceb5a8860fa"
+    ></iframe>
+  </div>
+  <div id="cbt1">
+    <a href="#cbt1" onclick="show()" id="cbt">Show chat bot</a>
+  </div>
+</div>
+<script>
+  function show() {
+    var x = document.getElementById("chatbot");
+    var y = document.getElementById("cbt");
+    if (x.style.display === "block") {
+      x.style.display = "none";
+      y.textContent = "Show Chat Bot";
+    } else {
+      x.style.display = "block";
+      y.textContent = "Hide Chat Bot";
+    }
+  }
+</script>
 {%endblock%}

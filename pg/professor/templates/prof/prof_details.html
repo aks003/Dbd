@@ -1,77 +1,63 @@
-{% extends "prof/base.html" %}
-{%block body%}
+{% extends "prof/base.html" %} {%block body%}
 <style>
-    .menu a{
-        text-decoration: none;
-        margin-block: 2vh;
-        color: white;
-        -webkit-appearance: button;
-                -moz-appearance: button;
-                appearance: button;
-                background-color: #27447e;
-                text-decoration: none;
-                
-                border-radius: 8px;
-                padding: 4px 8px;
-                margin-right: 2vw;
-    }
-    </style>
-<div style="
-display: flex;
-flex-direction: column;
-text-align: center;
-">
+  .menu a {
+    text-decoration: none;
+    margin-block: 2vh;
+    color: white;
+    -webkit-appearance: button;
+    -moz-appearance: button;
+    appearance: button;
+    background-color: #27447e;
+    text-decoration: none;
 
-<p>Professor Name   : {{prof.name}}</p>
-<p>Email            : {{prof.email}}</p>
-<p>Professor ID     : {{prof.prof_id}}</p>
-<p>Phone Number     : {{prof.phone_no}}</p>
-<!-- <a href="#" onclick="show()"> STUDENTS</a>
+    border-radius: 8px;
+    padding: 4px 8px;
+    margin-right: 2vw;
+  }
+</style>
+<div style="display: flex; flex-direction: column; text-align: center">
+  <p>Professor Name : {{prof.name}}</p>
+  <p>Email : {{prof.email}}</p>
+  <p>Professor ID : {{prof.prof_id}}</p>
+  <p>Phone Number : {{prof.phone_no}}</p>
+  <!-- <a href="#" onclick="show()"> STUDENTS</a>
 
 <a href="/professor/details">Details</a>
 <a href="/professor/marks">Marks</a> -->
-<div id="myDIV" style="display: flex;
-justify-content: center;">
+  <div id="myDIV" style="display: flex; justify-content: center">
     <table class="styled-table">
-        <thead>
-            <tr>
-                <th>Name</th>
-                <th>Phone</th>
-                <th>Email</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for a in stu %}
-            <tr>
-                <td><a href="/professor/marks?mark={{a.usn}}">{{a.name}}</a></td>
-                <td><p>{{a.email}}</p></td>
-                <td>{{a.phone_no}}</td>
-            </tr>
-            {%endfor%}
-        </tbody>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Phone</th>
+          <th>Email</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for a in stu %}
+        <tr>
+          <td><a href="/professor/marks?mark={{a.usn}}">{{a.name}}</a></td>
+          <td><p>{{a.email}}</p></td>
+          <td>{{a.phone_no}}</td>
+        </tr>
+        {%endfor%}
+      </tbody>
     </table>
+  </div>
 </div>
-</div>
-<div class="menu" style="
-display: flex;
-justify-content: space-evenly;
-">
-<a href="/professor/details" >Details</a>
-<a href="/professor/marks">Marks</a>
-{% if role == "PANELIST-IT" or role == "PANELIST-SE" %}
-<a href="{% url 'panelist' %}">Panelist</a>
+<div class="menu" style="display: flex; justify-content: space-evenly">
+  {% if role == "PANELIST-IT" or role == "PANELIST-SE" %}
+  <a href="{% url 'panelist' %}">Panelist</a>
 </div>
 {% endif %}
 <script>
-    function show()
-    {
-        var x = document.getElementById("myDIV");
-        if (x.style.display === "block") {
-        x.style.display = "none";
-        }
-        else {
-        x.style.display = "block";
-        }
+  function show() {
+    var x = document.getElementById("myDIV");
+    if (x.style.display === "block") {
+      x.style.display = "none";
+    } else {
+      x.style.display = "block";
     }
+  }
 </script>
 {%endblock%}
