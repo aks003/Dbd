@@ -1,3 +1,4 @@
+from tkinter import Widget
 from django import forms
 from django.forms import Form, ModelForm, fields
 from schema.models import deliverables_db
@@ -8,7 +9,6 @@ class DeliverablesForm(ModelForm):
         model = deliverables_db
         fields= ['report','ppt','gdrive_link','usn','phase_id']
         unique_together = [['usn', 'phase_id']]
-        
         widgets ={
             'report' : TextInput (attrs={'pattern' : "(https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9]+\.[^\s]{2,}|www\.[a-zA-Z0-9]+\.[^\s]{2,})",
                                          'oninvalid':"this.setCustomValidity('Enter A Valid URL')",
