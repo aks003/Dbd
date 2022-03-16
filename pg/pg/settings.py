@@ -25,7 +25,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-c0z&t-u=!9-l)!kkpv6z2=as6yv9vgsyedbwf(^4w-@h(5z6t2'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['https://pg-project-portal.herokuapp.com/','127.0.0.1']
 
@@ -121,7 +121,7 @@ USE_L10N = True
 
 USE_TZ = True
 
-STATIC_ROOT=os.path.join(BASE_DIR,'staticfiles')
+
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
@@ -131,9 +131,7 @@ STATIC_URL = '/static/'
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
-STATICFILES_DIRS = [
-        os.path.join(BASE_DIR, 'static')
-        ]
+
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
