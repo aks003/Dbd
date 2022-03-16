@@ -1,1 +1,1 @@
-web: gunicorn --pythonpath pg pg.wsgi
+web: gunicorn --pythonpath pg pg wsgi.py
