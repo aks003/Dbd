@@ -4,6 +4,10 @@ from django.urls import path
 from django.urls.conf import include
 from . import views
 
+
+
+  
+
 urlpatterns=[
     path('',views.home,name="home"),
     path('login/',views.login_view,name="login"),
@@ -11,6 +15,7 @@ urlpatterns=[
     path('signup/',views.signup,name="signup"),
     path('student/',include('student.urls')),
     path('professor/',include('professor.urls')),
-    path('admins/',include('admins.urls'))
+    path('admins/',include('admins.urls')),
+
 ]
 

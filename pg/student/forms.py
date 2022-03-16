@@ -1,4 +1,3 @@
-from tkinter import Widget
 from django import forms
 from django.forms import Form, ModelForm, fields
 from schema.models import deliverables_db
