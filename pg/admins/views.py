@@ -133,7 +133,7 @@ def professorDetails(request):
             temp.append(str(tobj.name) + "(" + tobj.branch + ")")
             names.extend(temp)
         d[i]=set(names)
-    print(d)
+
     context = {
         "obj": d,
         "prof_id":prid,
@@ -221,14 +221,14 @@ def marksInDetail(request):
         it.append(student.usn+" (Name:"+student.name+" Guide:"+student.prof_id.name+")")
         guide=list(professor_db.objects.filter(prof_id=student.prof_id))
         profs.append(*guide)
-        for re in rubrics_evaluation_db.objects.filter(usn=student.usn).order_by('usn'):
+        for re in rubrics_db.objects.all():
             row=[]
             # print(re.rubrics.phase_id.category,re.rubrics.phase_id.phase_number,re.rubrics.rname,re.rubrics.r_max_marks)
-            row.extend([re.rubrics.phase_id.category,re.rubrics.phase_id.phase_number,re.rubrics.rname,float(re.rubrics.r_max_marks)])
+            row.extend([re.phase_id.category,re.phase_id.phase_number,re.rname,float(re.r_max_marks)])
             trow=[]
             count=0
             for prof in profs: 
-                tlist=list(rubrics_evaluation_db.objects.filter(usn=student.usn,prof_id=prof.prof_id,rubrics__rname=re.rubrics.rname,rubrics__phase_id=re.rubrics.phase_id))
+                tlist=list(rubrics_evaluation_db.objects.filter(usn=student.usn,prof_id=prof.prof_id,rubrics__rname=re.rname,rubrics__phase_id=re.phase_id))
                 # print(tlist)
                 if len(tlist) == 0:
                     trow.append('-')
@@ -245,7 +245,7 @@ def marksInDetail(request):
         d[it]=val   
         profs.remove(*guide)
     profd.append("GUIDE")
-
+    print(d)
     e={}
     se=[]
     se_panelist=[]
@@ -265,14 +265,14 @@ def marksInDetail(request):
         se.append(student.usn+" (Name:"+student.name+" Guide:"+student.prof_id.name+")")
         guide=list(professor_db.objects.filter(prof_id=student.prof_id))
         profs.append(*guide)
-        for re in rubrics_evaluation_db.objects.filter(usn=student.usn).order_by('usn'):
+        for re in rubrics_db.objects.all():
             row=[]
             # print(re.rubrics.phase_id.category,re.rubrics.phase_id.phase_number,re.rubrics.rname,re.rubrics.r_max_marks)
-            row.extend([re.rubrics.phase_id.category,re.rubrics.phase_id.phase_number,re.rubrics.rname,float(re.rubrics.r_max_marks)])
+            row.extend([re.phase_id.category,re.phase_id.phase_number,re.rname,float(re.r_max_marks)])
             trow=[]
             count=0
             for prof in profs: 
-                tlist=list(rubrics_evaluation_db.objects.filter(usn=student.usn,prof_id=prof.prof_id,rubrics__rname=re.rubrics.rname,rubrics__phase_id=re.rubrics.phase_id))
+                tlist=list(rubrics_evaluation_db.objects.filter(usn=student.usn,prof_id=prof.prof_id,rubrics__rname=re.rname,rubrics__phase_id=re.phase_id))
                 # print(tlist)
                 if len(tlist) == 0:
                     trow.append('-')

@@ -84,6 +84,7 @@ def finalMarks(request):
     phase=""
     marks={}
     max_marks=0
+    rolecheck="PANELIST-"+usn.branch
     for i in rubrics:
         s=i.rubrics
         s=str(s)
@@ -93,7 +94,7 @@ def finalMarks(request):
         phase=s[:ind+2]
         marks_obtained=i.r_marks_obtained
         t2=0
-        if "PANELIST" in role and i.prof == guide:
+        if "PANELIST" == rolecheck and i.prof == guide:
             marks_obtained*=2
             max_marks+=float(s[-5:])
             t2=1
@@ -102,7 +103,7 @@ def finalMarks(request):
         else:
             temp=marks.get(phase)
             marks[phase]=[temp[0]+marks_obtained,temp[1]+1+t2]
-    if(len(rubrics)>0 and marks.get(phase)[1] == 6):
+    if(len(rubrics)>0 and marks.get(phase)[1] == 12):
         print(marks.get(phase)[0],max_marks)
         ans=float(marks.get(phase)[0])/max_marks
         ans=float(ans)*100
