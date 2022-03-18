@@ -94,7 +94,7 @@ def finalMarks(request):
         phase=s[:ind+2]
         marks_obtained=i.r_marks_obtained
         t2=0
-        if "PANELIST" == rolecheck and i.prof == guide:
+        if role == rolecheck and i.prof == guide:
             marks_obtained*=2
             max_marks+=float(s[-5:])
             t2=1
